@@ -81,30 +81,6 @@ set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
 " set wildmode=full                      " 补全菜单样式
 " set wildignore=*.o,*~,*.pyc,*.class    " 排除补全
 
-" 代码折叠
-set foldenable
-" 折叠方法
-" manual    手工折叠
-" indent    使用缩进表示折叠
-" expr      使用表达式定义折叠
-" syntax    使用语法定义折叠
-" diff      对没有更改的文本进行折叠
-" marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-set foldmethod=indent
-" 代码折叠自定义快捷键 <leader>zz
-" let g:FoldMethod = 0
-" map <leader>zz :call ToggleFold()<cr>
-" fun! ToggleFold()
-"     if g:FoldMethod == 0
-"         exe "normal! zM"
-"         let g:FoldMethod = 1
-"     else
-"         exe "normal! zR"
-"         let g:FoldMethod = 0
-"     endif
-" endfun
-
-
 " 上次文件编辑位置
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
