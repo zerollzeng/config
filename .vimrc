@@ -31,7 +31,7 @@ set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
 set autoread                           " 文件在Vim之外修改过，自动重新读入
 set lazyredraw                         " 运行宏时不重绘
-set colorcolumn="81,121"               " 80行显示竖线
+set colorcolumn=80                     " 80行显示竖线
 
 " 关闭错误提示
 set novisualbell                       " 关闭闪烁提示
