@@ -76,21 +76,6 @@ set softtabstop=4                      " 编辑模式下 <Tab> 宽度
 set shiftwidth=4                       " 自动缩进宽度
 set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
 
-" 补全
-" set wildmenu                           " 命令模式补全
-" set wildmode=full                      " 补全菜单样式
-" set wildignore=*.o,*~,*.pyc,*.class    " 排除补全
-
-" 上次文件编辑位置
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" 字体设置
-if has("gui_running")
-    set guifont=Monaco:h14
-endif
-
 " 状态栏
 set laststatus=2                       " 状态栏高度
 " set statusline=%<%f\ %h%m%r%=%k\ %m\ %r%y\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}\|%{&ff}]\ %-14.(%l,%c%V%)\ %P
