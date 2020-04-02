@@ -1,10 +1,8 @@
 " Simple vim config for server.
-" Version: 0.1
-" Author: Anton Chen <contact@antonchen.com>
-" Create Date: 2016-08-22 15:07:51
-" Last Modified: 2019-04-09 14:03:02
+" Version: 1.0
+" Author: zengren <zerollzeng@gmail.com>
 
-let Author = 'zerollzeng <zerollzeng@gmail.com>'
+let Author = 'zengren'
 
 " Settings
 " {{{
@@ -27,17 +25,12 @@ filetype indent on
 
 " 基础设置
 set shortmess=atI                      " 不显示欢迎信息
-set helplang=cn                        " 首选帮助语言
 set title                              " 终端标题
-set magic                              " 开启 magic 正则
 set nobackup                           " 关闭备份
 set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
-" set clipboard=unnamed                  " 拷贝到系统剪切板
-" set whichwrap+=<,>,h,l                 " 左右移动跨行
 set autoread                           " 文件在Vim之外修改过，自动重新读入
 set lazyredraw                         " 运行宏时不重绘
-set mouse=a
 
 " 关闭错误提示
 set novisualbell                       " 关闭闪烁提示
@@ -51,10 +44,10 @@ hi nonText ctermbg=NONE
 
 " 高亮
 " set cursorcolumn                       " 高亮当前列
-" set cursorline                         " 高亮当前行
+set cursorline                         " 高亮当前行
 
 " 剩余 7 行时翻页
-set scrolloff=7
+set scrolloff=15
 
 " 显示
 set ruler                              " 显示当前行号与列号
@@ -69,7 +62,7 @@ set showmode                           " 显示当前Vim模式
 " 搜索
 set hlsearch                           " 高亮匹配
 set incsearch                          " 开启即时搜索
-set ignorecase                         " 搜索时忽略大小写
+" set ignorecase                         " 搜索时忽略大小写
 set smartcase                          " 字符串有大写字母时大小写敏感
 
 " 缩进
@@ -83,12 +76,12 @@ set shiftwidth=4                       " 自动缩进宽度
 set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
 
 " 补全
-set wildmenu                           " 命令模式补全
-set wildmode=full                      " 补全菜单样式
-set wildignore=*.o,*~,*.pyc,*.class    " 排除补全
+" set wildmenu                           " 命令模式补全
+" set wildmode=full                      " 补全菜单样式
+" set wildignore=*.o,*~,*.pyc,*.class    " 排除补全
 
 " 代码折叠
-" set foldenable
+set foldenable
 " 折叠方法
 " manual    手工折叠
 " indent    使用缩进表示折叠
@@ -96,7 +89,7 @@ set wildignore=*.o,*~,*.pyc,*.class    " 排除补全
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-" set foldmethod=marker
+set foldmethod=indent
 " 代码折叠自定义快捷键 <leader>zz
 " let g:FoldMethod = 0
 " map <leader>zz :call ToggleFold()<cr>
@@ -267,35 +260,8 @@ nmap <F6> gg=G<C-o><C-o>
 "     endif
 " endfun
 
-" 快速保存
-nmap <leader>w :w<CR>
-" 快速退出
-nmap <leader>q :q<CR>
-" 快速保存退出
-nmap <leader>x :x<CR>
-
 " U 重做
 nmap U <C-r>
-
-" 快速进入命令行
-nmap ; :
-
-" 关闭搜索 ,/
-noremap <silent><leader>/ :nohls<CR>
-
-" Bash模式:C-a 行首,C-e 行尾
-map <C-a> <Home>
-map <C-e> <End>
-
-" 标签跳转
-map <S-Up> :bp<CR>
-map <S-Down> :bn<CR>
-
-" 关闭方向键
-" map <Left> <Nop>
-" map <Right> <Nop>
-" map <Up> <Nop>
-" map <Down> <Nop>
 
 " }}}
 
