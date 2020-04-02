@@ -3,10 +3,10 @@
 #### via curl
  
  ```
- sh -c "$(curl -fsSL https://raw.githubusercontent.com//zerollzeng/config/master/vim.sh)"
+curl https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/.vimrc
  ```
 #### via wget
 
 ```
-sh -c "$(wget -O- https://raw.githubusercontent.com//zerollzeng/config/master/vim.sh)"
+wget -O ~/.vimrc https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc
 ```
