@@ -7,6 +7,6 @@ curl https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/.vimr
 ### bash config
 
 ```
-curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.bashrc
+curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.bashrc && source ~/.bashrc
 ```
 
