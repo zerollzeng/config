@@ -1,12 +1,12 @@
 ### vim config
 
-#### via curl
- 
  ```
 curl https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/.vimrc
  ```
-#### via wget
+
+### bash config
 
 ```
-wget -O ~/.vimrc https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc
+curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.bashrc
 ```
+
