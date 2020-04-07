@@ -15,3 +15,5 @@ curl https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/.vimr
 ```
 curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.bashrc && source ~/.bashrc
 ```
+
+**Note: this will append config to .bashrc, so don't run this script mutiple time or delete old content before you run it again**
