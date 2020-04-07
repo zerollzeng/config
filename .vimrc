@@ -168,7 +168,6 @@ function! AutoSetFileHead()
         call append(2, "\# Create Date: ".NewFileTime)
         call append(3, "\# Last Modified: ".NewFileTime)
         call append(4, "\# Description: ")
-        call append(5, "HERE=$(cd -P -- $(dirname -- \"$0\") && pwd -P)")
         normal G
         normal o
     endif
