@@ -174,7 +174,7 @@ function! AutoSetFileHead()
 
     " python
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
+        call setline(1, "\# auto add header")
         call append(1, "\# encoding: utf-8")
         call append(2, "\# Author: ".g:Author)
         call append(3, "\# Create Date: ".NewFileTime)
