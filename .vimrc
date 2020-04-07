@@ -2,8 +2,6 @@
 " Version: 1.0
 " Author: zengren <zerollzeng@gmail.com>
 
-let Author = 'zengren'
-
 " Settings
 " {{{
 
@@ -158,32 +156,33 @@ autocmd BufRead,BufNewFile */usr/local/nginx/conf/*.conf set filetype=nginx
 
 autocmd BufRead,BufNewFile *.json set filetype=json
 
-autocmd BufNewFile * exec ":call AutoSetFileHead()"
-function! AutoSetFileHead()
-    let NewFileTime = strftime('%Y-%m-%d %H:%M:%S')
-    " .sh
-    if &filetype == 'sh'
-        call setline(1, "\#!/bin/bash")
-        call append(1, "\# Author: ".g:Author)
-        call append(2, "\# Create Date: ".NewFileTime)
-        call append(3, "\# Last Modified: ".NewFileTime)
-        call append(4, "\# Description: ")
-        normal G
-        normal o
-    endif
-
-    " python
-    if &filetype == 'python'
-        call setline(1, "\# auto add header")
-        call append(1, "\# encoding: utf-8")
-        call append(2, "\# Author: ".g:Author)
-        call append(3, "\# Create Date: ".NewFileTime)
-        call append(4, "\# Last Modified: ".NewFileTime)
-        call append(5, "\# Description: ")
-        normal G
-        normal o
-    endif
-endfunc
+" let Author = 'zengren'
+" autocmd BufNewFile * exec ":call AutoSetFileHead()"
+" function! AutoSetFileHead()
+"     let NewFileTime = strftime('%Y-%m-%d %H:%M:%S')
+"     " .sh
+"     if &filetype == 'sh'
+"         call setline(1, "\#!/bin/bash")
+"         call append(1, "\# Author: ".g:Author)
+"         call append(2, "\# Create Date: ".NewFileTime)
+"         call append(3, "\# Last Modified: ".NewFileTime)
+"         call append(4, "\# Description: ")
+"         normal G
+"         normal o
+"     endif
+" 
+"    " python
+"     if &filetype == 'python'
+"         call setline(1, "\# auto add header")
+"         call append(1, "\# encoding: utf-8")
+"         call append(2, "\# Author: ".g:Author)
+"         call append(3, "\# Create Date: ".NewFileTime)
+"         call append(4, "\# Last Modified: ".NewFileTime)
+"         call append(5, "\# Description: ")
+"         normal G
+"         normal o
+"     endif
+" endfunc
 
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 function! <SID>StripTrailingWhitespaces()
