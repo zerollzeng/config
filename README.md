@@ -17,3 +17,10 @@ curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.ba
 ```
 
 **Note: this will append config to .bashrc, so don't run this script mutiple time or delete old content before you run it again**
+
+#### extra
+
+also take a look at [fzf](https://github.com/junegunn/fzf), which enable search bash history with ctrl+r, it looks like
+
+![image](https://user-images.githubusercontent.com/38289304/79304720-8a0ed700-7f24-11ea-9656-37546e8d83bf.png)
+
