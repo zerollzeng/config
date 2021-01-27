@@ -20,7 +20,5 @@ curl https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.ba
 
 #### extra
 
-also take a look at [fzf](https://github.com/junegunn/fzf), which enable search bash history with ctrl+r, it looks like
-
-![image](https://user-images.githubusercontent.com/38289304/79304720-8a0ed700-7f24-11ea-9656-37546e8d83bf.png)
+also take a look at [fzf](https://github.com/junegunn/fzf), which enable search bash history with ctrl+r
 
