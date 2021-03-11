@@ -57,11 +57,13 @@ set showcmd                            " 在状态栏显示正在输入的命令
 set showmode                           " 显示当前Vim模式
 " set showmatch                          " 当关闭如括号这样的代码时，光标跳转到括号开始再跳回
 " set matchtime=3                        " 光标跳转时间
+set list
+set listchars=tab:>-                     " 显示tab
 
 " 搜索
 set hlsearch                           " 高亮匹配
 set incsearch                          " 开启即时搜索
-" set ignorecase                         " 搜索时忽略大小写
+set ignorecase                         " 搜索时忽略大小写
 set smartcase                          " 字符串有大写字母时大小写敏感
 
 " 缩进
