@@ -2,9 +2,6 @@
 " Version: 1.0
 " Author: zengren <zerollzeng@gmail.com>
 
-" Settings
-" {{{
-
 " Leader
 let mapleader = ','
 let g:mapleader = ','
@@ -21,6 +18,13 @@ filetype plugin on
 " 开启 indent 缩进
 filetype indent on
 
+" 配色
+" hi Normal ctermbg=NONE
+" hi nonText ctermbg=NONE
+highlight Normal ctermfg=black ctermbg=white
+set colorcolumn=80                     " 80行显示竖线
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
 " 基础设置
 set shortmess=atI                      " 不显示欢迎信息
 set title                              " 终端标题
@@ -29,7 +33,6 @@ set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
 set autoread                           " 文件在Vim之外修改过，自动重新读入
 set lazyredraw                         " 运行宏时不重绘
-set colorcolumn=80                     " 80行显示竖线
 
 " 关闭错误提示
 set novisualbell                       " 关闭闪烁提示
@@ -37,9 +40,6 @@ set noerrorbells                       " 关闭声音提示
 set t_vb=
 set tm=500
 
-" 配色
-hi Normal ctermbg=NONE
-hi nonText ctermbg=NONE
 
 " 高亮
 " set cursorcolumn                       " 高亮当前列
@@ -75,6 +75,56 @@ set tabstop=4                          " <Tab> 宽度
 set softtabstop=4                      " 编辑模式下 <Tab> 宽度
 set shiftwidth=4                       " 自动缩进宽度
 set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
+
+" 括号自动补全
+" "inoremap ( ()<LEFT>
+" "inoremap [ []<LEFT>
+" "inoremap { {}<LEFT>
+" "inoremap " ""<LEFT>
+" "inoremap ' ''<LEFT>
+" "inoremap < <><LEFT>
+" "
+" "function! RemovePairs()
+" "    let s:line = getline(".")
+" "    let s:previous_char = s:line[col(".")-1]
+" "
+" "    if index(["(","[","{"],s:previous_char) != -1
+" "        let l:original_pos = getpos(".")
+" "        execute "normal %"
+" "        let l:new_pos = getpos(".")
+" "        " only right (
+" "        if l:original_pos == l:new_pos
+" "            execute "normal! a\<BS>"
+" "            return
+" "        end
+" "
+" "        let l:line2 = getline(".")
+" "        if len(l:line2) == col(".")
+" "            execute "normal! v%xa"
+" "        else
+" "            execute "normal! v%xi"
+" "        end
+" "    else
+" "        execute "normal! a\<BS>"
+" "    end
+" "endfunction
+" "
+" "function! RemoveNextDoubleChar(char)
+" "    let l:line = getline(".")
+" "    let l:next_char = l:line[col(".")]
+" "
+" "    if a:char == l:next_char
+" "        execute "normal! l"
+" "    else
+" "        execute "normal! i" . a:char . ""
+" "    end
+" "endfunction
+" "
+" "inoremap <BS> <ESC>:call RemovePairs()<CR>a
+" "inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>a
+" "inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>a
+" "inoremap } <ESC>:call RemoveNextDoubleChar('}')<CR>a
+" "inoremap > <ESC>:call RemoveNextDoubleChar('>')<CR>a
 
 " 状态栏
 set laststatus=2                       " 状态栏高度
@@ -158,7 +208,7 @@ autocmd BufRead,BufNewFile */usr/local/nginx/conf/*.conf set filetype=nginx
 
 autocmd BufRead,BufNewFile *.json set filetype=json
 
-" let Author = 'zengren'
+" let Author = 'zerollzeng'
 " autocmd BufNewFile * exec ":call AutoSetFileHead()"
 " function! AutoSetFileHead()
 "     let NewFileTime = strftime('%Y-%m-%d %H:%M:%S')
@@ -211,8 +261,8 @@ nmap <F3> :set list! list?<CR>
 nmap <F4> :set wrap! wrap?<CR>
 " 粘贴模式
 set pastetoggle=<F5>
-" 格式化
-nmap <F6> gg=G<C-o><C-o>
+"" 格式化
+" nmap <F6> gg=G<C-o><C-o>
 " nmap <F6> :call Format()<CR>
 " function! Format()
 "     if &filetype != 'json'
@@ -221,19 +271,3 @@ nmap <F6> gg=G<C-o><C-o>
 "         %!python -m json.tool
 "     endif
 " endfun
-
-" U 重做
-nmap U <C-r>
-
-" }}}
-
-" Plugin
-" {{{
-" SuperTab
-let g:SuperTabMappingForward = "<s-tab>"
-let g:SuperTabRetainCompletionType = 0
-let g:SuperTabDefaultCompletionType = "<C-N>"
-" TagmaLast
-let g:TagmaLastAutoUpdate = 1
-let g:TagmaLastTimeFormat = '%Y-%m-%d %H:%M:%S'
-" }}}
