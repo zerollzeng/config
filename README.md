@@ -10,6 +10,11 @@ apt-get update -y && apt-get install git wget -y
 
 wget -O - https://raw.githubusercontent.com/zerollzeng/config/master/install.sh | sh && source ~/.bashrc
 
+#### Only Bash
+
+wget -O - https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> ~/.bashrc
+
+*Note: the bash config is append to your .bashrc, so don't run this command multiple times*
 
 #### Only vim
 
