@@ -22,8 +22,8 @@ filetype indent on
 " hi Normal ctermbg=NONE
 " hi nonText ctermbg=NONE
 highlight Normal ctermfg=white ctermbg=black
-set colorcolumn=80                     " 80行显示竖线
-highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+" set colorcolumn=80                     " 80行显示竖线
+" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " 基础设置
 set shortmess=atI                      " 不显示欢迎信息
