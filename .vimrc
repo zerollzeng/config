@@ -29,6 +29,7 @@ highlight Normal ctermfg=white ctermbg=black
 set shortmess=atI                      " 不显示欢迎信息
 set title                              " 终端标题
 set nobackup                           " 关闭备份
+set noswapfile
 set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
 set autoread                           " 文件在Vim之外修改过，自动重新读入
