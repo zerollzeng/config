@@ -21,7 +21,7 @@ filetype indent on
 " 配色
 " hi Normal ctermbg=NONE
 " hi nonText ctermbg=NONE
-highlight Normal ctermfg=white ctermbg=black
+" highlight Normal ctermfg=white ctermbg=black
 " set colorcolumn=80                     " 80行显示竖线
 " highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
