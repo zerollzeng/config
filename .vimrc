@@ -77,56 +77,6 @@ set softtabstop=4                      " 编辑模式下 <Tab> 宽度
 set shiftwidth=4                       " 自动缩进宽度
 set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
 
-" 括号自动补全
-" "inoremap ( ()<LEFT>
-" "inoremap [ []<LEFT>
-" "inoremap { {}<LEFT>
-" "inoremap " ""<LEFT>
-" "inoremap ' ''<LEFT>
-" "inoremap < <><LEFT>
-" "
-" "function! RemovePairs()
-" "    let s:line = getline(".")
-" "    let s:previous_char = s:line[col(".")-1]
-" "
-" "    if index(["(","[","{"],s:previous_char) != -1
-" "        let l:original_pos = getpos(".")
-" "        execute "normal %"
-" "        let l:new_pos = getpos(".")
-" "        " only right (
-" "        if l:original_pos == l:new_pos
-" "            execute "normal! a\<BS>"
-" "            return
-" "        end
-" "
-" "        let l:line2 = getline(".")
-" "        if len(l:line2) == col(".")
-" "            execute "normal! v%xa"
-" "        else
-" "            execute "normal! v%xi"
-" "        end
-" "    else
-" "        execute "normal! a\<BS>"
-" "    end
-" "endfunction
-" "
-" "function! RemoveNextDoubleChar(char)
-" "    let l:line = getline(".")
-" "    let l:next_char = l:line[col(".")]
-" "
-" "    if a:char == l:next_char
-" "        execute "normal! l"
-" "    else
-" "        execute "normal! i" . a:char . ""
-" "    end
-" "endfunction
-" "
-" "inoremap <BS> <ESC>:call RemovePairs()<CR>a
-" "inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>a
-" "inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>a
-" "inoremap } <ESC>:call RemoveNextDoubleChar('}')<CR>a
-" "inoremap > <ESC>:call RemoveNextDoubleChar('>')<CR>a
-
 " 状态栏
 set laststatus=2                       " 状态栏高度
 " set statusline=%<%f\ %h%m%r%=%k\ %m\ %r%y\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}\|%{&ff}]\ %-14.(%l,%c%V%)\ %P
@@ -209,34 +159,6 @@ autocmd BufRead,BufNewFile */usr/local/nginx/conf/*.conf set filetype=nginx
 
 autocmd BufRead,BufNewFile *.json set filetype=json
 
-" let Author = 'zerollzeng'
-" autocmd BufNewFile * exec ":call AutoSetFileHead()"
-" function! AutoSetFileHead()
-"     let NewFileTime = strftime('%Y-%m-%d %H:%M:%S')
-"     " .sh
-"     if &filetype == 'sh'
-"         call setline(1, "\#!/bin/bash")
-"         call append(1, "\# Author: ".g:Author)
-"         call append(2, "\# Create Date: ".NewFileTime)
-"         call append(3, "\# Last Modified: ".NewFileTime)
-"         call append(4, "\# Description: ")
-"         normal G
-"         normal o
-"     endif
-" 
-"    " python
-"     if &filetype == 'python'
-"         call setline(1, "\# auto add header")
-"         call append(1, "\# encoding: utf-8")
-"         call append(2, "\# Author: ".g:Author)
-"         call append(3, "\# Create Date: ".NewFileTime)
-"         call append(4, "\# Last Modified: ".NewFileTime)
-"         call append(5, "\# Description: ")
-"         normal G
-"         normal o
-"     endif
-" endfunc
-
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 function! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -251,24 +173,37 @@ endfun
 " {{{
 
 " 禁用 Ex 模式
-nmap Q <Nop>
+nmap Q <Nop> 
 " 禁用 <F1> 帮助
-nmap <F1> <Nop>
+nmap <F1> <Nop> 
 " 行号
 nmap <F2> :set nu! nu?<CR>
+imap <F2> <ESC>:set nu! nu?<CR>a
 " 换行符
 nmap <F3> :set list! list?<CR>
 " 自动换行
 nmap <F4> :set wrap! wrap?<CR>
 " 粘贴模式
 set pastetoggle=<F5>
-"" 格式化
-" nmap <F6> gg=G<C-o><C-o>
-" nmap <F6> :call Format()<CR>
-" function! Format()
-"     if &filetype != 'json'
-"         exec "normal gg=G\<C-o>\<C-o>"
-"     else
-"         %!python -m json.tool
-"     endif
-" endfun
+
+nmap <F6> :call TogglePair()<CR>
+imap <F6> <ESC>:call TogglePair()<CR>a                                                                                                                                                                                               
+let is_pair = 0
+function! TogglePair()
+    let g:is_pair = !g:is_pair
+    if g:is_pair == 1
+        inoremap ( ()<LEFT>
+        inoremap [ []<LEFT>
+        inoremap { {}<LEFT>
+        inoremap " ""<LEFT>
+        inoremap ' ''<LEFT>
+        inoremap < <><LEFT>
+    else  
+        iunmap (
+        iunmap [
+        iunmap {
+        iunmap "
+        iunmap '
+        iunmap <
+    endif 
+endfun
