@@ -11,11 +11,13 @@ export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m
 # tab completion ignore case
 # bind 'set completion-ignore-case on'
 
-# bash history limit
-HISTFILESIZE=8000
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
 
-# avoid duplicate
-export HISTCONTROL=ignoreboth:erasedups
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ##############################################################
 ######################### end ################################
