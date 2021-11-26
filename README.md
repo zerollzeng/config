@@ -22,4 +22,4 @@ wget -O - https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/
 
 #### Only fzf
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install && source ~/.bashrc
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --all && source ~/.bashrc
