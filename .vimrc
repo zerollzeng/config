@@ -141,37 +141,6 @@ set formatoptions+=B
 " 选中颜色
 hi Visual term=reverse cterm=reverse guibg=Grey
 
-" }}}
-
-" File type
-" {{{
-
-" Fix crontab
-autocmd FileType crontab set nobackup nowritebackup
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
-autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab noai nocin nosi inde=
-autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown  set filetype=markdown.mkd
-
-autocmd BufRead,BufNewFile nginx.conf set filetype=nginx
-autocmd BufRead,BufNewFile */etc/nginx/*.conf set filetype=nginx
-autocmd BufRead,BufNewFile */usr/local/nginx/conf/*.conf set filetype=nginx
-
-autocmd BufRead,BufNewFile *.json set filetype=json
-
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-function! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-" }}}
-
-" Key map
-" {{{
-
 " 禁用 Ex 模式
 nmap Q <Nop> 
 " 禁用 <F1> 帮助
