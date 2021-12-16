@@ -19,16 +19,52 @@ filetype plugin on
 filetype indent on
 
 " 配色
-" hi Normal ctermbg=NONE
-" hi nonText ctermbg=NONE
-" highlight Normal ctermfg=white ctermbg=black
 " set colorcolumn=80                     " 80行显示竖线
 " highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+" The maximum line length to warn about, in characters.
+let linelengthlimit = 80
+" The first character that is considered over the length. Should always be
+" linelengthlimit + 1
+let upper_warning_length = linelengthlimit + 1
+" The first character to start an early warning for, if enabled.
+let lower_warning_length = linelengthlimit - 3
+
+" The filetypes to add line length warnings to.
+let filemask = "*.c,*.cc,*.cpp,*.h,*.py"
+
+" The warnings/highlights to enable
+let warning_column = 0
+let early_length_warning = 0
+let long_line_warning = 1
+let mark_extra_whitespace = 1
+
+if early_length_warning
+    " Highlight text that is close to the character line limit.
+    execute "autocmd BufWinEnter " .
+\           filemask .
+\           " let w:m1=matchadd('Search', '\\%<" .
+\           upper_warning_length .
+\           "v.\\%>" .
+\           lower_warning_length .
+\           "v', -1)"
+endif
+
+if long_line_warning
+    " Highlight text that is over 80 characters long using the ErrorMsg
+    "highlight rule.
+    execute "autocmd BufWinEnter " .
+\           filemask .
+\           " let w:m2=matchadd('ErrorMsg', '\\%>" .
+\           linelengthlimit .
+\           "v.\\+', -1)"
+endif
+
 
 " 基础设置
 set shortmess=atI                      " 不显示欢迎信息
 set title                              " 终端标题
 set nobackup                           " 关闭备份
+set nowb
 set noswapfile
 set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
@@ -143,8 +179,8 @@ hi Visual term=reverse cterm=reverse guibg=Grey
 
 " 禁用 Ex 模式
 nmap Q <Nop> 
-" 禁用 <F1> 帮助
-nmap <F1> <Nop> 
+" 切换tab
+nmap <F1> gt
 " 行号
 nmap <F2> :set nu! nu?<CR>
 imap <F2> <ESC>:set nu! nu?<CR>a
