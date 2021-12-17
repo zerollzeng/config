@@ -20,6 +20,10 @@ wget -O - https://raw.githubusercontent.com/zerollzeng/config/master/.bashrc >> 
 
 wget -O - https://raw.githubusercontent.com/zerollzeng/config/master/.vimrc > ~/.vimrc
 
+#### code complete for vim
+
+git clone git://github.com/ajh17/VimCompletesMe.git ~/.vim/pack/vendor/start/VimCompletesMe
+
 #### Only fzf
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --all && source ~/.bashrc
