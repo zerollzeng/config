@@ -1,8 +1,3 @@
-" Simple vim config for server.
-" Version: 1.0
-" Author: zengren <zerollzeng@gmail.com>
-
-" Leader
 let mapleader = ','
 let g:mapleader = ','
 " 高亮
@@ -18,58 +13,31 @@ filetype plugin on
 " 开启 indent 缩进
 filetype indent on
 
-" 配色
-" set colorcolumn=80                     " 80行显示竖线
-" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 " The maximum line length to warn about, in characters.
-let linelengthlimit = 80
-" The first character that is considered over the length. Should always be
-" linelengthlimit + 1
-let upper_warning_length = linelengthlimit + 1
-" The first character to start an early warning for, if enabled.
-let lower_warning_length = linelengthlimit - 3
+let linelengthlimit = 120"
 
 " The filetypes to add line length warnings to.
 let filemask = "*.c,*.cc,*.cpp,*.h,*.py"
 
-" The warnings/highlights to enable
-let warning_column = 0
-let early_length_warning = 0
 let long_line_warning = 1
-let mark_extra_whitespace = 1
-
-if early_length_warning
-    " Highlight text that is close to the character line limit.
-    execute "autocmd BufWinEnter " .
-\           filemask .
-\           " let w:m1=matchadd('Search', '\\%<" .
-\           upper_warning_length .
-\           "v.\\%>" .
-\           lower_warning_length .
-\           "v', -1)"
-endif
 
 if long_line_warning
-    " Highlight text that is over 80 characters long using the ErrorMsg
-    "highlight rule.
     execute "autocmd BufWinEnter " .
 \           filemask .
-\           " let w:m2=matchadd('ErrorMsg', '\\%>" .
+\           " let w:m2=matchadd('Search', '\\%>" .
 \           linelengthlimit .
 \           "v.\\+', -1)"
 endif
 
 
 " 基础设置
-set shortmess=atI                      " 不显示欢迎信息
-set title                              " 终端标题
 set nobackup                           " 关闭备份
 set nowb
 set noswapfile
+
 set nocompatible                       " 禁止 vi 模式
 set backspace=indent,eol,start         " 设置 <Backspace>
 set autoread                           " 文件在Vim之外修改过，自动重新读入
-set lazyredraw                         " 运行宏时不重绘
 
 " 关闭错误提示
 set novisualbell                       " 关闭闪烁提示
@@ -79,29 +47,31 @@ set tm=500
 
 
 " 高亮
-" set cursorcolumn                       " 高亮当前列
 set cursorline                         " 高亮当前行
+hi CursorLine term=bold cterm=bold
 
 " 剩余 7 行时翻页
 set scrolloff=15
 
 " 显示
-set ruler                              " 显示当前行号与列号
 set number                             " 显示行号
 set numberwidth=6                      " 设置行号列宽度
-" set nowrap                             " 关闭自动换行
+highlight LineNr ctermfg=grey
 set showcmd                            " 在状态栏显示正在输入的命令
-set showmode                           " 显示当前Vim模式
-" set showmatch                          " 当关闭如括号这样的代码时，光标跳转到括号开始再跳回
-" set matchtime=3                        " 光标跳转时间
 set list
 set listchars=tab:>-                     " 显示tab
+
+" Add a bit extra margin to the left
+set foldcolumn=1
 
 " 搜索
 set hlsearch                           " 高亮匹配
 set incsearch                          " 开启即时搜索
 set ignorecase                         " 搜索时忽略大小写
 set smartcase                          " 字符串有大写字母时大小写敏感
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
 
 " 缩进
 set expandtab                          " 使用空格缩进
@@ -113,51 +83,11 @@ set softtabstop=4                      " 编辑模式下 <Tab> 宽度
 set shiftwidth=4                       " 自动缩进宽度
 set smarttab                           " 插入 <Tab> 时使用 'shiftwidth'
 
-" 状态栏
-set laststatus=2                       " 状态栏高度
-" set statusline=%<%f\ %h%m%r%=%k\ %m\ %r%y\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}\|%{&ff}]\ %-14.(%l,%c%V%)\ %P
-" 转换文件大小
-function! Buf_total_num()
-    return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-endfunction
-function! File_size(f)
-    let l:size = getfsize(expand(a:f))
-    if l:size == 0 || l:size == -1 || l:size == -2
-        return ''
-    endif
-    if l:size < 1024
-        return l:size.' bytes'
-    elseif l:size < 1024*1024
-        return printf('%.1f', l:size/1024.0).'k'
-    elseif l:size < 1024*1024*1024
-        return printf('%.1f', l:size/1024.0/1024.0) . 'm'
-    else
-        return printf('%.1f', l:size/1024.0/1024.0/1024.0) . 'g'
-    endif
-endfunction
-" 定义状态栏格式
-set statusline=%<%1*[B-%n]%*
-set statusline+=%2*[TOT:%{Buf_total_num()}]%*
-set statusline+=%3*\ %{File_size(@%)}\ %*
-set statusline+=%4*%m\ %F\ %*
-set statusline+=%=%5*\ %r%y\ [%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}\|%{&ff}]\ %-14.(%l,%c%V%)
-set statusline+=%6*\ %P\ %*
-" 自定义状态栏颜色
-" 终端
-hi User1 cterm=bold ctermfg=237 ctermbg=39
-hi User2 cterm=None ctermfg=39  ctermbg=242
-hi User3 cterm=None ctermfg=251 ctermbg=240
-hi User4 cterm=bold ctermfg=169 ctermbg=239
-hi User5 cterm=None ctermfg=250 ctermbg=238
-hi User6 cterm=None ctermfg=249 ctermbg=240
-" GUI
-hi User1 gui=bold guifg=#3a3a3a guibg=#00afff
-hi User2 gui=None guifg=#00afff guibg=#6c6c6c
-hi User3 gui=None guifg=#c6c6c6 guibg=#585858
-hi User4 gui=bold guifg=#d75faf guibg=#4e4e4e
-hi User5 gui=None guifg=#bcbcbc guibg=#444444
-hi User6 gui=None guifg=#b2b2b2 guibg=#585858
+" Show matching brackets when text indicator is over them
+set showmatch
 
+" 状态栏
+set laststatus=0                       " disable status bar
 " 文件格式
 set fileformat=unix
 
@@ -170,15 +100,8 @@ set termencoding=utf-8
 set fileformats=unix,dos,mac
 set fileencodings=utf-8,ucs-bom,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-" 如遇Unicode值大于255的文本，不必等到空格再折行
-set formatoptions+=m
-" 合并两行中文时，不在中间加空格
-set formatoptions+=B
-" 选中颜色
-hi Visual term=reverse cterm=reverse guibg=Grey
-
 " 禁用 Ex 模式
-nmap Q <Nop> 
+nmap Q <Nop>
 " 切换tab
 nmap <F1> gt
 " 行号
@@ -192,7 +115,7 @@ nmap <F4> :set wrap! wrap?<CR>
 set pastetoggle=<F5>
 
 nmap <F6> :call TogglePair()<CR>
-imap <F6> <ESC>:call TogglePair()<CR>a                                                                                                                                                                                               
+imap <F6> <ESC>:call TogglePair()<CR>a                                                                                                                                               
 let is_pair = 0
 function! TogglePair()
     let g:is_pair = !g:is_pair
@@ -203,12 +126,13 @@ function! TogglePair()
         inoremap " ""<LEFT>
         inoremap ' ''<LEFT>
         inoremap < <><LEFT>
-    else  
+    else
         iunmap (
         iunmap [
         iunmap {
         iunmap "
         iunmap '
         iunmap <
-    endif 
+    endif
 endfun
+
