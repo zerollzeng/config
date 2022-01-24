@@ -61,9 +61,6 @@ set showcmd                            " 在状态栏显示正在输入的命令
 set list
 set listchars=tab:>-                     " 显示tab
 
-" Add a bit extra margin to the left
-set foldcolumn=1
-
 " 搜索
 set hlsearch                           " 高亮匹配
 set incsearch                          " 开启即时搜索
