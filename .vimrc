@@ -14,10 +14,10 @@ filetype plugin on
 filetype indent on
 
 " The maximum line length to warn about, in characters.
-let linelengthlimit = 120"
+let linelengthlimit = 120
 
 " The filetypes to add line length warnings to.
-let filemask = "*.c,*.cc,*.cpp,*.h,*.py"
+let filemask = "*.c *.cc *.cpp *.h *.py"
 
 let long_line_warning = 1
 
