@@ -10,6 +10,7 @@ export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m
 
 # tab completion ignore case
 # bind 'set completion-ignore-case on'
+alias beep='for i in {1..3}; do echo -en "\007"; sleep 0.3; done'
 
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
