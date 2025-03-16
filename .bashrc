@@ -6,7 +6,26 @@
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m\]\w \[\e[91m\]\$(parse_git_branch)\n\[\e[92m\]$ \[\e[00m\]"
+# Timing functions
+timer_start() {
+    timer=${timer:-$SECONDS}
+}
+
+timer_stop() {
+    if [[ -n "$timer" ]]; then
+        timer_show=$((SECONDS - timer))
+        unset timer
+    else
+        timer_show=0
+    fi
+}
+
+# Set up traps and prompt
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
+# Updated PS1 with inline execution time
+export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m\]\w \[\e[91m\]\$(parse_git_branch) \[\e[92m\](\${timer_show}s)\n\$ \[\e[00m\]"
 
 # tab completion ignore case
 # bind 'set completion-ignore-case on'
