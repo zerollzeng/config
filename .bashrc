@@ -23,7 +23,7 @@ timer_stop() {
 
 # Set up traps and prompt
 trap 'timer_start' DEBUG
-export PROMPT_COMMAND="timer_stop; history -a; history -n"
+export PROMPT_COMMAND="timer_stop; history -a; history -r"
 
 # Updated PS1 with inline execution time
 export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m\]\w \[\e[91m\]\$(parse_git_branch) \[\e[92m\](\${timer_show}s)\n\$ \[\e[00m\]"
