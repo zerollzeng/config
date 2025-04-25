@@ -17,9 +17,9 @@ timer_stop() {
 }
 
 # Git branch parser
-parse_git_branch() {
-  git branch 2>/dev/null | sed -n '/\* /s///p'
-}
+ parse_git_branch() {
+      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+ }
 
 # Set up traps and prompt
 trap 'timer_start' DEBUG
