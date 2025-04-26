@@ -2,19 +2,22 @@
 ############### added by zerollzeng/config ###################
 ##############################################################
 
-# Timing functions
-timer_start() {
+function timer_start {
     timer=${timer:-$SECONDS}
 }
 
-timer_stop() {
-    if [[ -n "$timer" ]]; then
-        timer_show=$((SECONDS - timer))
-        unset timer
-    else
-        timer_show=0
-    fi
+function timer_stop {
+    timer_show=$(($SECONDS - $timer))
+    unset timer
 }
+
+trap 'timer_start' DEBUG
+
+if [ -z "$PROMPT_COMMAND" ]; then
+    PROMPT_COMMAND="timer_stop"
+else
+    PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
 
 # Git branch parser with color coding based on repository state
 parse_git_branch() {
@@ -29,10 +32,6 @@ parse_git_branch() {
         fi
     fi
 }
-
-# Set up traps and prompt
-trap 'timer_start' DEBUG
-PROMPT_COMMAND="timer_stop"
 
 # Updated PS1 with inline execution time
 export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m\]\w \[\e[91m\]\$(parse_git_branch) \[\e[92m\](\${timer_show}s)\n\$ \[\e[00m\]"
