@@ -16,14 +16,23 @@ timer_stop() {
     fi
 }
 
-# Git branch parser
- parse_git_branch() {
-      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
- }
+# Git branch parser with color coding based on repository state
+parse_git_branch() {
+    local branch
+    branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    
+    if [[ -n "$branch" ]]; then
+        if git diff --quiet 2>/dev/null; then
+            echo -e "\e[92m($branch)\e[0m"  # Green if clean
+        else
+            echo -e "\e[91m($branch*)\e[0m" # Red if dirty
+        fi
+    fi
+}
 
 # Set up traps and prompt
 trap 'timer_start' DEBUG
-export PROMPT_COMMAND="timer_stop; history -a; history -r"
+PROMPT_COMMAND="timer_stop"
 
 # Updated PS1 with inline execution time
 export PS1="\[\e[95m\]\u @ \[\e[96m\]\H \[\e[00m\]\D{%Y/%m/%d-%H:%M:%S} \[\e[93m\]\w \[\e[91m\]\$(parse_git_branch) \[\e[92m\](\${timer_show}s)\n\$ \[\e[00m\]"
